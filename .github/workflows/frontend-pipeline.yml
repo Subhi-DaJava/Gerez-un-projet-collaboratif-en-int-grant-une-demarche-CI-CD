@@ -25,11 +25,13 @@ jobs:
           uses: actions/setup-node@v4
           with:
             node-version: 14
+            cache: 'npm'
+            cache-dependency-path: front/package-lock.json
 
         - name: Install dependencies
           run: |
             cd front
-            npm install
+            npm ci
 
         - name: Build with npm
           run: |
@@ -48,13 +50,16 @@ jobs:
           uses: actions/setup-node@v4
           with:
             node-version: 14
+            cache: 'npm'
+            cache-dependency-path: front/package-lock.json
 
         - name: Install dependencies
           run: |
             cd front
             npm ci
 
-        - name: Run unit tests
+        - name: Run unit tests and Generate test coverage report
           run: |
             cd front
-            npm run test -- --no-watch
+            npm run test:ci
+            
