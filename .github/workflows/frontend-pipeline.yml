@@ -78,30 +78,13 @@ jobs:
                 cache-dependency-path: front/package-lock.json
 
             - name: Install dependencies
+              id: karma_reporter
               run: |
                 cd front
                 npm ci
                 npm run test:ci
-
-            - name: Test Report
-              uses: dorny/test-reporter@v1
-              if: success() || failure()
               with:
-                  name: Karma Tests
-                  path: front/coverage/bobapp/index.html
-
-            - name: Test report Artifact
-              uses: dorny/test-reporter@v1
-              with:
-                artifact: 'test-report'
-                name: 'Karma Tests Report'
-                path: 'front/coverage/bobapp/'
-                reporter: jest-junit
-                list-suites: 'all'
-                list-test: 'all'
-                fail-on-error: 'true'
-                fail-on-empty: 'true'
-                working-directory: 'front'
+                path: front/coverage/bobapp/index.html
 
             - name: Upload test coverage report
               uses: actions/upload-artifact@v4
@@ -109,3 +92,8 @@ jobs:
                 name: test-report
                 path: front/coverage/bobapp
                 retention-days: 1
+
+            - name: Get the Coverage info
+              run: |
+                echo "Coverage: ${{ steps.karma_reporter.outputs.coveragePercentage }}%"
+                echo "Coverage summary: ${{ steps.karma_reporter.outputs.coverageSummary }}"
