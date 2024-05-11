@@ -62,4 +62,38 @@ jobs:
           run: |
             cd front
             npm run test:ci
-            
+
+    test-report:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repo --> downloading the code resource
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: 14
+                cache: 'npm'
+                cache-dependency-path: front/package-lock.json
+
+            - name: Install dependencies
+              run: |
+                cd front
+                npm ci
+                npm run test:ci
+
+            - name: Test Report
+              uses: dorny/test-reporter@v1
+              if: success() || failure()
+              with:
+                  name: Karma Tests
+                  path: front/coverage/bobapp/index.html
+                  reporter: karma-junit-test
+
+            - name: Upload test coverage report
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-report
+                path: front/coverage/bobapp
+                retention-days: 1
