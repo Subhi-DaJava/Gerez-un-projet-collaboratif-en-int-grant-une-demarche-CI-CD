@@ -5,12 +5,12 @@ on:
   push:
 
 jobs:
-    job:
-      uses: .github/workflows/backend-pipeline.yml
+    build-backend:
+      uses: .github/workflows/backend-pipeline.yml@develop
 
     build:
       runs-on: ubuntu-latest
-      needs: [job]
+      needs: [build-backend]
       steps:
         - name: Checkout repo --> downloading the code resource
           uses: actions/checkout@v4
