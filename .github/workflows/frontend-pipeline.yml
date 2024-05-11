@@ -89,7 +89,6 @@ jobs:
               with:
                   name: Karma Tests
                   path: front/coverage/bobapp/index.html
-                  reporter: jest-junit
 
             - name: Test report Artifact
               uses: dorny/test-reporter@v1
