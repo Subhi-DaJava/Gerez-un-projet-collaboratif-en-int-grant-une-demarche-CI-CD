@@ -3,6 +3,10 @@ name: BoB Backend Docker Build and Push image Pipeline
 on:
   workflow_run:
     workflows: ['backend-pipeline.yml']
+    branches:
+      - main
+      - develop
+
     types:
       - completed
 
