@@ -2,7 +2,7 @@ name: BoB Backend Docker Build and Push image Pipeline
 
 on:
   workflow_run:
-    workflows: ["BoB Backend API Pipeline"]
+    workflows: ["backend-pipeline"]
     types:
       - completed
 jobs:
@@ -41,4 +41,4 @@ jobs:
               context: back
               file: ./Dockerfile
               push: true
-              tags: ${{ secrets.DOCKERHUB_USERNAME }}/bob-backend-api:lastest:latest
+              tags: ${{ secrets.DOCKERHUB_USERNAME }}/bob-backend-api:lastest
