@@ -8,6 +8,7 @@ on:
     paths:
       - back/**
       - .github/workflows/backend-pipeline.yml
+      - .github/workflows/docker-build-push-backend.yml
   pull_request:
     branches:
       - main
