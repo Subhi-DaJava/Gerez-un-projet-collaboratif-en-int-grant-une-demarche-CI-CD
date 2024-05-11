@@ -1,6 +1,7 @@
 name: BoB Backend API Pipeline
 
 on:
+  workflow_call:
   push:
     branches:
       - main

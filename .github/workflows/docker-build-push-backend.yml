@@ -1,11 +1,12 @@
 name: BoB Backend Docker Build and Push image Pipeline
 
 on:
+  workflow_call:
   push:
 
 jobs:
     job:
-      uses: ./.github/workflows/backend-pipeline.yml
+      uses: .github/workflows/backend-pipeline.yml
 
     build:
       runs-on: ubuntu-latest
