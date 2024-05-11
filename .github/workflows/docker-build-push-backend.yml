@@ -1,20 +1,15 @@
 name: BoB Backend Docker Build and Push image Pipeline
 
 on:
-  workflow_run:
-    workflows: ["BoB Backend API Pipeline"]
-    branches:
-      - main
-      - develop
-
-    types:
-      - completed
+  push:
 
 jobs:
+    job:
+      uses: .github/workflows/backend-pipeline.yml@main
+
     build:
       runs-on: ubuntu-latest
-      if: ${{ github.event.workflow_run.conclusion == 'success' }}
-
+      needs: [job]
       steps:
         - name: Checkout repo --> downloading the code resource
           uses: actions/checkout@v4
