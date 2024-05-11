@@ -25,8 +25,8 @@ jobs:
         - name: Build Docker Image
           uses: docker/build-push-action@v5
           with:
-              context: back
-              file: ./Dockerfile
+              context: ./back
+              file: ./back/Dockerfile
               push: false
               tags: ${{ secrets.DOCKERHUB_USERNAME }}/bob-backend-api:lastest
 
@@ -39,7 +39,7 @@ jobs:
         - name: Push Docker Image to Docker Hub
           uses: docker/build-push-action@v5
           with:
-              context: back
-              file: ./Dockerfile
+              context: ./back
+              file: ./back/Dockerfile
               push: true
               tags: ${{ secrets.DOCKERHUB_USERNAME }}/bob-backend-api:lastest
