@@ -5,7 +5,7 @@ on:
 
 jobs:
     job:
-      uses: ./.github/workflows/backend-pipeline.yml@main
+      uses: ./.github/workflows/backend-pipeline.yml
 
     build:
       runs-on: ubuntu-latest
