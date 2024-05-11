@@ -89,7 +89,20 @@ jobs:
               with:
                   name: Karma Tests
                   path: front/coverage/bobapp/index.html
-                  reporter: karma-junit-test
+                  reporter: jest-junit
+
+            - name: Test report Artifact
+              uses: dorny/test-reporter@v1
+              with:
+                artifact: 'test-report'
+                name: 'Karma Tests Report'
+                path: 'front/coverage/bobapp/'
+                reporter: jest-junit
+                list-suites: 'all'
+                list-test: 'all'
+                fail-on-error: 'true'
+                fail-on-empty: 'true'
+                working-directory: 'front'
 
             - name: Upload test coverage report
               uses: actions/upload-artifact@v4
