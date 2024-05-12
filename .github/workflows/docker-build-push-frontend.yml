@@ -5,7 +5,7 @@ on:
   push:
 
 jobs:
-    build-backend:
+    build-frontend:
       uses: ./.github/workflows/frontend-pipeline.yml
 
     build:
