@@ -1,6 +1,8 @@
 name: BoB Frontend Pipeline
 
 on:
+  workflow_call:
+
   push:
     branches:
       - main
