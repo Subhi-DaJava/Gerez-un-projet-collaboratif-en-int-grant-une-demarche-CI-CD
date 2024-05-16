@@ -1,6 +1,7 @@
 name: BoB Backend API Pipeline
 
 on:
+  workflow_call:
   push:
     branches:
       - main
@@ -8,6 +9,7 @@ on:
     paths:
       - back/**
       - .github/workflows/backend-pipeline.yml
+      - .github/workflows/docker-build-push-backend.yml
   pull_request:
     branches:
       - main
@@ -33,4 +35,46 @@ jobs:
             cd back
             mvn clean 
             mvn install 
-            
+
+    jacoco-test-repporter:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repo --> downloading the code resource
+              uses: actions/checkout@v4
+
+            - name: Setup JDK 11
+              uses: actions/setup-java@v4
+              with:
+                java-version: '11'
+                distribution: 'temurin'
+                cache: maven
+
+            - name: Run Jacoco Test Reporter
+              run: |
+                cd back
+                mvn test jacoco:report
+
+            - name: Upload Jacoco Test Report
+              uses: actions/upload-artifact@v4
+              with:
+                name: jacoco-report
+                path: back/target/site/jacoco
+                retention-days: 1
+
+            - name: JaCoCo Code Coverage Report
+              id: jacoco_reporter
+              uses: PavanMudigonda/jacoco-reporter@v5.0
+              with:
+                  coverage_results_path: back/target/site/jacoco/jacoco.xml
+                  coverage_report_name: Coverage
+                  coverage_report_title: JaCoCo
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  skip_check_run: false
+                  minimum_coverage: 80
+                  fail_below_threshold: false
+                  publish_only_summary: false
+
+            - name: Get the Coverage info
+              run: |
+                  echo "Coverage: ${{ steps.jacoco_reporter.outputs.coveragePercentage }}%"
+                  echo "Coverage summary: ${{ steps.jacoco_reporter.outputs.coverageSummary }}"
