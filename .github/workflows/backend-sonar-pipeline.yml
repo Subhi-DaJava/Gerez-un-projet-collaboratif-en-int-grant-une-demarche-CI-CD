@@ -18,7 +18,7 @@ jobs:
       - name: SonarQube Scan
         with:
           projectBaseDir: ./back
-        run: mvn sonar:sonar
+        uses: mvn sonar:sonar
 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
