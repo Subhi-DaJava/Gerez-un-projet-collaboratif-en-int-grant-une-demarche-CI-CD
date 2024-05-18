@@ -1,4 +1,4 @@
-name: Build
+name: SonarCloud Pipeline for Frontend
 on:
   push:
     branches:
@@ -6,18 +6,37 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  sonar-cloud-analysis-frontend:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo --> downloading the code resource
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: SetUp Node.js 14
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
+          cache: 'npm'
+          cache-dependency-path: front/package-lock.json
+
+      - name: NPM clean install
+        working-directory: front
+        run: npm ci
+
+      - name: Coverage tests
+        working-directory: front
+        run: |
+          npm install -g @angular/cli
+          ng test --code-coverage --watch=false --browsers ChromeHeadless
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         with:
-          projectBaseDir: ./front
+          projectBaseDir: front
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_FRONT_TOKEN }}
