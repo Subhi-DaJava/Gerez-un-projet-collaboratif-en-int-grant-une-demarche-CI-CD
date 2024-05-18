@@ -1,3 +1,4 @@
+name: SonarCloud Pipeline for Frontend
 on:
   push:
     branches:
@@ -46,9 +47,6 @@ jobs:
         with:
           projectBaseDir: front
           args: >
-            -Dsonar.projectKey=bob-frontend-sonar-scanner
-            -Dsonar.projectName=bob-frontend-sonar-scanner
-            -Dsonar.organization=subhi-dajava-1
             -Dsonar.javascript.lcov.reportPaths=/coverage/bobapp/lcov.info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
