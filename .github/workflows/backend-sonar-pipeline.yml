@@ -16,7 +16,7 @@ jobs:
       - name: SonarCloud Scan
         run: |
           cd back 
-          org.sonarsource.scanner.maven:sonar
+          mvn org.sonarsource.scanner.maven:sonar
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
