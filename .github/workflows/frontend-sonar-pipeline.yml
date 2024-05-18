@@ -1,7 +1,8 @@
 on:
   push:
     branches:
-      - branch
+      - develop
+      - main
   pull_request:
     types: [ opened, synchronize, reopened ]
 jobs:
