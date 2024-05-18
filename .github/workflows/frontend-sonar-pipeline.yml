@@ -45,6 +45,7 @@ jobs:
           args: >
             -Dsonar.projectKey=subhi-dajava-1_Gerez-un-projet-collaboratif-en-int-grant-une-demarche-CI-CD
             -Dsonar.organization=subhi-dajava-1
+            -Dsonar.sources=./src/app
             -Dsonar.javascript.lcov.reportPaths=./coverage/bobapp/lcov.info
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
