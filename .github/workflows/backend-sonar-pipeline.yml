@@ -13,12 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          path: ./back
           fetch-depth: 0
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          path: ./back
+          projectBaseDire: ./back
           java-version: 17
           distribution: 'zulu'
       - name: Cache SonarCloud packages
@@ -30,7 +29,6 @@ jobs:
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
-
           path: ./back/~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
