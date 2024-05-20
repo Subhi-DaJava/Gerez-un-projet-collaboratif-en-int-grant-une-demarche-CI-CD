@@ -2,13 +2,7 @@ name: SonarCloud Pipeline for Frontend
 on:
   workflow_call:
   push:
-    branches:
-      - develop
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
+
 jobs:
   build-frontend:
     name: Build Bob Frontend Pipeline

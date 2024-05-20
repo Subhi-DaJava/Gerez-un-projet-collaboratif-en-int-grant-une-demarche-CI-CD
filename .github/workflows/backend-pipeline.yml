@@ -12,6 +12,7 @@ on:
       - .github/workflows/docker-build-push-backend.yml
 
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
       - main
 

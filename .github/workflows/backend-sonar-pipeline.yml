@@ -2,13 +2,7 @@ name: SonarCloud Pipeline for Backend
 on:
   workflow_call:
   push:
-    branches:
-      - develop
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
+
 jobs:
   build-backend:
     name: Build BoB Backend Pipeline
