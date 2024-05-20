@@ -1,5 +1,6 @@
 name: SonarCloud Pipeline for Frontend
 on:
+  workflow_call:
   push:
     branches:
       - develop
@@ -9,9 +10,14 @@ on:
     branches:
       - main
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  build-frontend:
+    name: Build Bob Frontend Pipeline
+    uses: ./.github/workflows/frontend-pipeline.yml
+
+  sonar-cloud-analysis-frontend:
+    name: Analyze Bob Frontend With SonarCloud
     runs-on: ubuntu-latest
+    needs: [build-frontend]
     steps:
       - name: Checkout repo --> downloading the code resource
         uses: actions/checkout@v4

@@ -5,12 +5,12 @@ on:
   push:
 
 jobs:
-    build-backend:
-      uses: ./.github/workflows/backend-pipeline.yml
+    sonar-cloud-analysis-backend:
+      uses: ./.github/workflows/backend-sonar-pipeline.yml
 
     build:
       runs-on: ubuntu-latest
-      needs: [build-backend]
+      needs: [sonar-cloud-analysis-backend]
       steps:
         - name: Checkout repo --> downloading the code resource
           uses: actions/checkout@v4

@@ -1,15 +1,23 @@
 name: SonarCloud Pipeline for Backend
 on:
+  workflow_call:
   push:
     branches:
       - develop
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+    branches:
+      - main
 jobs:
+  build-backend:
+    name: Build BoB Backend Pipeline
+    uses: ./.github/workflows/backend-pipeline.yml
+
   sonar-cloud-analysis-backend:
-    name: Build and analyze
+    name: Analyze BoB Backend With SonarCloud
     runs-on: ubuntu-latest
+    needs: [build-backend]
     steps:
       - uses: actions/checkout@v3
 
