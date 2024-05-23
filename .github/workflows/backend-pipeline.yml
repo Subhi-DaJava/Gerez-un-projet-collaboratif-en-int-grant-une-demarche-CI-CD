@@ -1,4 +1,4 @@
-name: BoB Backend API Pipeline
+name: BoB Backend Pipeline - BUILD, TEST, REPORT, SONAR, DOCKER, DEPLOY
 
 on:
   push:
@@ -125,3 +125,18 @@ jobs:
             file: ./back/Dockerfile
             push: true
             tags: ${{ secrets.DOCKERHUB_USERNAME }}/bob-backend-api:latest
+
+    package-and-deploy-backend:
+      runs-on: ubuntu-latest
+      needs: [build-and-push-backend-docker-image]
+      steps:
+        - name: Checkout repo --> downloading the code resource
+          uses: actions/checkout@v4
+
+        - name: Package Backend
+          run: |
+            cd back
+            mvn clean package
+            
+        - name: Deploy Backend
+          run: echo "Deploying Backend API..."
