@@ -1,4 +1,4 @@
-name: BoB Frontend Pipeline - BUILD, TEST, REPORT, SONAR, DOCKER, DEPLOY
+name: BoB Frontend Pipeline-BUILD, TEST, KARMA TEST REPORT, SONAR, DOCKER, DEPLOY
 
 on:
   push:

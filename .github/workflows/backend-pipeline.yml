@@ -1,4 +1,4 @@
-name: BoB Backend Pipeline - BUILD, TEST, REPORT, SONAR, DOCKER, DEPLOY
+name: BoB Backend Pipeline-BUILD, JACOCO TEST REPORT, SONAR, DOCKER, DEPLOY
 
 on:
   push:
