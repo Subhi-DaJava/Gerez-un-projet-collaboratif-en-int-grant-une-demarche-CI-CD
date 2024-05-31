@@ -1,0 +1,21 @@
+services:
+    build-backend-service:
+        image: bobapp-backend:latest
+        build: ./back
+        ports:
+        - "8080:8080"
+        networks:
+        - bob-app-network
+    build-frontend-service:
+        image: bobapp-frontend:latest
+        build: ./front
+        restart: on-failure
+        ports:
+        - "4200:80"
+        depends_on:
+            - build-backend-service
+        networks:
+        - bob-app-network
+networks:
+    bob-app-network:
+        driver: bridge
