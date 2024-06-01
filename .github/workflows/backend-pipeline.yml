@@ -13,7 +13,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
-
 jobs:
     backend-build:
       runs-on: ubuntu-latest
@@ -139,4 +138,4 @@ jobs:
             mvn clean package
             
         - name: Deploy Backend
-          run: echo "Deploying Backend API..."
+          run: echo "Deploying Backend API In Progress ..."

@@ -13,7 +13,6 @@ on:
     types: [opened, synchronize, reopened]
     branches:
       - main
-
 jobs:
     frontend-build:
       runs-on: ubuntu-latest
@@ -190,4 +189,4 @@ jobs:
             npm run build --if-present
 
         - name: Deploy Frontend
-          run: echo "Deploying the frontend application..."
+          run: echo "Deploying the frontend application In Progress ..."
