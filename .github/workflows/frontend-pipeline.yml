@@ -3,16 +3,10 @@ name: BoB Frontend Pipeline - BUILD, TEST, REPORT, SONAR, DOCKER, DEPLOY
 on:
   push:
     branches:
-      - main
       - develop
     paths:
       - front/**
       - .github/workflows/frontend-pipeline.yml
-
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
 
 jobs:
     frontend-build:

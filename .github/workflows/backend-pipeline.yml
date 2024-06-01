@@ -3,16 +3,10 @@ name: BoB Backend Pipeline - BUILD, TEST, REPORT, SONAR, DOCKER, DEPLOY
 on:
   push:
     branches:
-      - main
       - develop
     paths:
       - back/**
       - .github/workflows/backend-pipeline.yml
-
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
 
 jobs:
     backend-build:
