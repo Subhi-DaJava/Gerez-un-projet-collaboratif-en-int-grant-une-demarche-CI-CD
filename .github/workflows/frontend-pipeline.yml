@@ -3,18 +3,11 @@ name: BoB Frontend Pipeline-BUILD, TEST, KARMA TEST REPORT, SONAR, DOCKER, DEPLO
 on:
   push:
     branches:
-      - main
-      - develop
       - docker-compose
     paths:
       - front/**
       - .github/workflows/frontend-pipeline.yml
       - ./docker-compose.yml
-
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
 
 jobs:
     frontend-build:

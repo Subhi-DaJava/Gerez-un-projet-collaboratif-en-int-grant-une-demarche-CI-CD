@@ -3,17 +3,11 @@ name: BoB Backend Pipeline-BUILD, JACOCO TEST REPORT, SONAR, DOCKER, DEPLOY
 on:
   push:
     branches:
-      - main
-      - develop
       - docker-compose
     paths:
       - back/**
       - .github/workflows/backend-pipeline.yml
       - ./docker-compose.yml
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches:
-      - main
 
 jobs:
     backend-build:
